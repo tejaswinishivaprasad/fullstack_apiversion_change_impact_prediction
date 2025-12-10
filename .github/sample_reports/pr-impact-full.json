@@ -1,0 +1,65 @@
+{
+  "status": "ok",
+  "pr": "118",
+  "files_changed": [
+    "impact_ai_repo/ai-core/src/datasets/curated_clean/openapi/canonical/openapi--catalog-service--5db42f07--v2.canonical.json"
+  ],
+  "files_analyzed": 1,
+  "entries": [
+    {
+      "file": "impact_ai_repo/ai-core/src/datasets/curated_clean/openapi/canonical/openapi--catalog-service--5db42f07--v2.canonical.json",
+      "result": {
+        "diffs": [
+          {
+            "ace_id": "pair-5db42f0787fd244f7705::ace::0",
+            "type": "ENDPOINT_REMOVED",
+            "path": "/orders/{id}",
+            "method": "servers",
+            "detail": "SERVERS /orders/{id} removed"
+          },
+          {
+            "ace_id": "pair-5db42f0787fd244f7705::ace::1",
+            "type": "ENDPOINT_REMOVED",
+            "path": "/orders/{id}",
+            "method": "get",
+            "detail": "GET /orders/{id} removed"
+          },
+          {
+            "ace_id": "pair-5db42f0787fd244f7705::ace::2",
+            "type": "ENDPOINT_ADDED",
+            "path": "/carts/{id}",
+            "method": "servers",
+            "detail": "SERVERS /carts/{id} added"
+          },
+          {
+            "ace_id": "pair-5db42f0787fd244f7705::ace::3",
+            "type": "ENDPOINT_ADDED",
+            "path": "/carts/{id}",
+            "method": "get",
+            "detail": "GET /carts/{id} added"
+          }
+        ],
+        "analyze": {
+          "summary": {
+            "service_risk": 1.0,
+            "num_aces": 4
+          },
+          "backend_impacts": [
+            {
+              "service": "Invoice-Service",
+              "risk_score": 0.8
+            }
+          ],
+          "frontend_impacts": [
+            {
+              "service": "Ops-Console",
+              "risk_score": 0.61
+            }
+          ],
+          "ai_explanation": "Predicted risk is High (1.00).\n\u2022 Change types: endpoint_removed=2, endpoint_added=2\n\u2022 1 frontend module(s) possibly affected\n\u2022 1 backend dependency(ies) impacted\n\u2022 Sample changes (detailed):\n\u2022 endpoint_removed SERVERS /orders/{id}: SERVERS /orders/{id} removed\n\u2022 endpoint_removed GET /orders/{id}: GET /orders/{id} removed\n\u2022 endpoint_added SERVERS /carts/{id}: SERVERS /carts/{id} added\n\u2022 endpoint_added GET /carts/{id}: GET /carts/{id} added",
+          "pair_id": "pair-5db42f0787fd244f7705"
+        }
+      }
+    }
+  ]
+}
