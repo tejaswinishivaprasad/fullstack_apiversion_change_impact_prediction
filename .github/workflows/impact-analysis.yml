@@ -1,0 +1,90 @@
+name: PR impact analysis
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  checks: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  run-impact-analysis:
+    name: Run AI Core analysis (PR)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      PYTHON_VERSION: "3.11"
+      AI_CORE_DIR: "impact_ai_repo/ai-core/src"
+      CI_SCRIPT: ".github/scripts/ci_analyze_pr.sh"
+      SKIP_POST: "false"   # <<< IMPORTANT: ENABLE posting from CI script
+      FAIL_ON_BLOCK: "false"
+
+    steps:
+      - name: Checkout code (full history needed for diffs)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Ensure base branch is fetched (helps some checkout setups)
+        if: ${{ github.event.pull_request.base.ref != '' }}
+        run: |
+          echo "Fetching base branch: ${{ github.event.pull_request.base.ref }}"
+          git fetch origin ${{ github.event.pull_request.base.ref }} --depth=1 || true
+
+      - name: Set up Python (stable runtime)
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Cache pip (based on light requirements file if present)
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/impact_ai_repo/ai-core/src/requirements-ci.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install minimal CI deps (requirements-ci.txt if present)
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          if [ -f impact_ai_repo/ai-core/src/requirements-ci.txt ]; then
+            python -m pip install --prefer-binary -r impact_ai_repo/ai-core/src/requirements-ci.txt
+          fi
+
+      - name: Debug git state
+        run: |
+          echo "=== git branch/ref ==="
+          git rev-parse --abbrev-ref HEAD || true
+          echo "=== recent commits ==="
+          git --no-pager log --oneline -n 20 || true
+          echo "=== diff origin/main...HEAD ==="
+          git fetch origin main --depth=1 || true
+          git diff --name-only origin/main...HEAD || true
+
+      - name: Make CI script executable
+        run: chmod +x .github/scripts/ci_analyze_pr.sh || true
+
+      - name: Run CI analysis script
+        id: run_analysis
+        env:
+          AI_CORE_DIR: ${{ env.AI_CORE_DIR }}
+          GITHUB_WORKSPACE: ${{ github.workspace }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -x
+          .github/scripts/ci_analyze_pr.sh
+
+      - name: Upload report artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr-impact-report-${{ github.event.pull_request.number }}
+          path: |
+            pr-impact-report.json
+            pr-impact-full.json
