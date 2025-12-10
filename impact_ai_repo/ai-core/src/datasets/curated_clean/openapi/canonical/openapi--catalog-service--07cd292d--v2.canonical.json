@@ -51,7 +51,7 @@
   "paths": {
     "/webhooks/v3/id/settings": {
       "delete": {
-        "operationId": "delete-webhooks-v3-appid-settings-clear",
+        "operationId": "delete-webhooks-v3-appid-settings-clear-v2",
         "parameters": [
           {
             "explode": false,
@@ -199,7 +199,7 @@
         ]
       },
       "get": {
-        "operationId": "get-webhooks-v3-appid-settings-getall-v2",
+        "operationId": "get-webhooks-v3-appid-settings-getall",
         "parameters": [
           {
             "explode": false,
@@ -211,14 +211,6 @@
               "type": "integer"
             },
             "style": "simple"
-          },
-          {
-            "name": "qce2618",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            },
-            "required": false
           }
         ],
         "responses": {
@@ -416,7 +408,7 @@
         ]
       },
       "put": {
-        "operationId": "put-webhooks-v3-appid-settings-configure",
+        "operationId": "put-webhooks-v3-appid-settings-configure-v2",
         "parameters": [
           {
             "explode": false,
@@ -677,7 +669,7 @@
         ]
       }
     },
-    "/webhooks/v3/paymentid/subscriptions": {
+    "/webhooks/v3/orderid/subscriptions": {
       "get": {
         "operationId": "get-webhooks-v3-appid-subscriptions-getall",
         "parameters": [
@@ -924,7 +916,7 @@
         ]
       },
       "post": {
-        "operationId": "post-webhooks-v3-appid-subscriptions-create",
+        "operationId": "post-webhooks-v3-appid-subscriptions-create-v2",
         "parameters": [
           {
             "explode": false,
@@ -1237,7 +1229,7 @@
     },
     "/webhooks/v3/sku/subscriptions/batch/update": {
       "post": {
-        "operationId": "post-webhooks-v3-appid-subscriptions-batch-update-updatebatch",
+        "operationId": "post-webhooks-v3-appid-subscriptions-batch-update-updatebatch-v2",
         "parameters": [
           {
             "explode": false,
@@ -1767,7 +1759,7 @@
         ]
       }
     },
-    "/webhooks/v3/orderid/subscriptions/paymentid": {
+    "/webhooks/v3/orderid/subscriptions/orderid": {
       "delete": {
         "operationId": "delete-webhooks-v3-appid-subscriptions-subscriptionid-archive",
         "parameters": [
@@ -1928,7 +1920,7 @@
         ]
       },
       "get": {
-        "operationId": "get-webhooks-v3-appid-subscriptions-subscriptionid-getbyid",
+        "operationId": "get-webhooks-v3-appid-subscriptions-subscriptionid-getbyid-v2",
         "parameters": [
           {
             "explode": false,
@@ -2171,7 +2163,7 @@
         ]
       },
       "patch": {
-        "operationId": "patch-webhooks-v3-appid-subscriptions-subscriptionid-update-v2",
+        "operationId": "patch-webhooks-v3-appid-subscriptions-subscriptionid-update",
         "parameters": [
           {
             "explode": false,
