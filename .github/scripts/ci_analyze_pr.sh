@@ -353,7 +353,7 @@ post_and_gate() {
     fi
 
     if [ -n "$ACE_EXPLANATIONS" ]; then
-      printf "• Sample changes (detailed):\n"
+      printf "• Change Items (detailed):\n"
       printf "%s\n" "$ACE_EXPLANATIONS"
     elif [ -n "$EXPL_TRIMMED" ]; then
       # fallback to original server explanation if jq-based one is empty
