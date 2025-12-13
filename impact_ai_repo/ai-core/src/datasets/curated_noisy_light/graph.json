@@ -204,6 +204,20 @@
       "confidence": 0.67
     },
     {
+      "src": "svc:petclinic-order-service",
+      "dst": "svc:petclinic-search-service",
+      "path": "/owners",
+      "evidence": "curation-svc",
+      "confidence": 0.46
+    },
+        {
+      "src": "ui:portal-ui",
+      "dst": "petclinic-search-service",
+      "path": "/owners",
+      "evidence": "curation-svc",
+      "confidence": 0.46
+    },
+        {
       "src": "svc:petclinic-shipping-service",
       "dst": "svc:auth-service",
       "path": "/appointments",

@@ -267,6 +267,13 @@
       "confidence": 0.8
     },
     {
+    "src": "svc:order-service",
+    "dst": "svc:analytics-service",
+    "path": "/inventory/{id}",
+    "evidence": "curation-svc",
+    "confidence": 0.7
+    },
+    {
       "src": "svc:auth-service",
       "dst": "svc:user-service",
       "path": "/user-service/reports",
