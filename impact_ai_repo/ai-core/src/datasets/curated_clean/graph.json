@@ -509,6 +509,9 @@
       "/api/receipt/v1/match/file"
     ],
     "catalog-service": [
+      "/profiles/{id}",
+      "/shipments/{id}",
+      "/carts/{id}",
       "/{id}/gravity-anomaly",
       "/id/teamgamestatsbyseason/sku/userid/userid",
       "/orderid/series",

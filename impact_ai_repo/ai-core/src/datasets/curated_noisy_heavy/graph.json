@@ -372,6 +372,13 @@
       "confidence": 0.55
     },
     {
+      "src": "svc:order-service",
+      "dst": "svc:analytics-service",
+      "path": "/inventory/{id}",
+      "evidence": "curation-svc",
+      "confidence": 0.38
+    },
+    {
       "src": "ui:admin-ui",
       "dst": "svc:inventory-service",
       "path": "/pets",
@@ -560,7 +567,10 @@
       "/owners",
       "/appointments",
       "/analytics-service/reports",
-      "/reports"
+      "/reports",
+      "/inventory/{id}",
+      "/analytics/events",
+      "/reports/summary"
     ],
     "inventory-service": [
       "/pets",
